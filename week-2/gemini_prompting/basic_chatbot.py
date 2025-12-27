@@ -3,14 +3,13 @@ import google.generativeai as genai
 import strip_markdown
 import configparser
 
-API_KEY = os.environ.get("GEMINI_API_KEY")
+prompts = configparser.ConfigParser()
+prompts.read('prompts.env', encoding='utf-8')
+API_KEY = prompts.get("KEYS", "GEMINI_API_KEY", fallback=os.environ.get("GEMINI_API_KEY"))
 genai.configure(api_key=API_KEY)
+
 LLM = "gemini-2.5-flash"
 model = genai.GenerativeModel(LLM)
-
-# Read system prompts from config file
-prompts = configparser.ConfigParser()
-prompts.read('prompts.env')
 
 # Set system prompt
 #system_prompt = prompts.get("SYSTEM_PROMPTS", "IT_HELPDESK")
