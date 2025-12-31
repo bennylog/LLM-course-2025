@@ -15,7 +15,7 @@ from sentence_transformers import SentenceTransformer
 min_token_length = 30
 
 # Ollama model name - user can change this
-OLLAMA_MODEL = st.sidebar.text_input("Ollama Model Name", value="llama3", help="Name of the Ollama model to use (e.g., llama3, mistral, gemma:2b)")
+OLLAMA_MODEL = st.sidebar.text_input("gemma:2b", value="llama3", help="Name of the Ollama model to use (e.g., llama3, mistral, gemma:2b)")
 
 # Chunking strategy selection
 CHUNKING_STRATEGY = st.sidebar.selectbox(
@@ -62,7 +62,7 @@ if not get_from_session(st, SESSION_VARS.LOADED_MODELS):
     nlp.add_pipe("sentencizer")
     put_to_session(st, SESSION_VARS.NLP, nlp)
 
-    embedding_model_cpu = SentenceTransformer(model_name_or_path="/Users/dmitrykan/.cache/huggingface/hub/models--sentence-transformers--all-mpnet-base-v2/snapshots/e8c3b32edf5434bc2275fc9bab85f82640a19130",
+    embedding_model_cpu = SentenceTransformer(model_name_or_path="all-MiniLM-L12-v2",
                                           device="cpu") # choose the device to load the model to (note: GPU will often be *much* faster than CPU)
     put_to_session(st, SESSION_VARS.EMBEDDING_MODEL_CPU, embedding_model_cpu)
 
